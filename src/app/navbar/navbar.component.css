@@ -1,0 +1,26 @@
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    margin-top: 10px;
+}
+
+.navbar-title{
+    font-weight: 700;
+}
+
+.navbar-menu{
+    display: flex;
+    justify-content: space-around;
+    width: 200px;
+}
+
+.navbar a{
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.navbar a:hover{
+    color:hsl(360,99%,31%) ;
+}
