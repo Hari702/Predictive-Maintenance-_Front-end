@@ -19,8 +19,11 @@
 .navbar a{
     cursor: pointer;
     font-weight: 500;
+    text-decoration: none;
+    color: black;
 }
 
 .navbar a:hover{
     color:hsl(360,99%,31%) ;
+    text-decoration: underline;
 }
