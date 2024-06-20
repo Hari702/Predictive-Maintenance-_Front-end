@@ -9,31 +9,41 @@ import { PredictionComponent } from './prediction/prediction.component';
 import {RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { PredictionResultComponent } from './prediction-result/prediction-result.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { NgxGaugeModule } from 'ngx-gauge';
+import { ConfigurationComponent } from './configuration/configuration.component';
 
 
 
 // Define route
 
-const routes:Routes=[
-  {path:'',component:HomeComponent},
-  {path:'Home',component:HomeComponent},
-  {path:'Prediction',component:PredictionComponent}
-]
+// const routes:Routes=[
+//   {path:'',component:HomeComponent},
+//   {path:'Home',component:HomeComponent},
+//   {path:'Prediction',component:PredictionComponent},
+//   {path:'PredictionResult',component:PredictionResultComponent}
+// ]
 
+// const config: SocketIoConfig = { url: 'http://127.0.0.1:5000', options: { transports: ['websocket'] } };
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    PredictionComponent
+    PredictionComponent,
+    PredictionResultComponent,
+    ConfigurationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule.forRoot(routes),
+    // RouterModule.forRoot(routes),
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgxGaugeModule
+    // SocketIoModule.forRoot(config)
   ],
   providers: [],
   bootstrap: [AppComponent]

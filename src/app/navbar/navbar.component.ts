@@ -10,4 +10,8 @@ import { filter } from 'rxjs/operators';
 })
 export class NavbarComponent  {
    display:boolean=true
+   selectedLink: string = "Home";
+  handleClick(link: string) {
+    this.selectedLink = link;
+  }
 }

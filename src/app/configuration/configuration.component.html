@@ -1,0 +1,441 @@
+<!-- <div>
+
+  <div>
+
+  </div>
+
+</div> -->
+
+
+
+<div class="title">Configure sensor reading</div>
+
+<form class="form-container" #predictionForm="ngForm" (ngSubmit)="onFormSubmitted(predictionForm)">
+  <div class="single-container">
+    <h3>Air temperature</h3>
+    <div class="input-container">
+      <div class="input-min">
+        <label>Min</label>
+        <input type="number" name="air-temperature-min" [(ngModel)]="formData['air-temperature-min']">
+      </div>
+      <span style="margin-right: 10px;">-</span>
+      <div class="input-max">
+        <label>Max</label>
+        <input type="number" name="air-temperature-max" [(ngModel)]="formData['air-temperature-max']">
+      </div>
+    </div>
+  </div>
+
+  <div class="single-container">
+    <h3>Process temperature</h3>
+    <div class="input-container">
+      <div class="input-min">
+        <label>Min</label>
+        <input type="number" name="process-temperature-min" [(ngModel)]="formData['process-temperature-min']">
+      </div>
+      <span style="margin-right: 10px;">-</span>
+      <div class="input-max">
+        <label>Max</label>
+        <input type="number" name="process-temperature-max" [(ngModel)]="formData['process-temperature-max']">
+      </div>
+    </div>
+  </div>
+
+  <div class="single-container">
+    <h3>Rotational speed</h3>
+    <div class="input-container">
+      <div class="input-min">
+        <label>Min</label>
+        <input type="number" name="rotational-speed-min" [(ngModel)]="formData['rotational-speed-min']">
+      </div>
+      <span style="margin-right: 10px;">-</span>
+      <div class="input-max">
+        <label>Max</label>
+        <input type="number" name="rotational-speed-max" [(ngModel)]="formData['rotational-speed-max']">
+      </div>
+    </div>
+  </div>
+
+  <div class="single-container">
+    <h3>Torque</h3>
+    <div class="input-container">
+      <div class="input-min">
+        <label>Min</label>
+        <input type="number" name="torque-min" [(ngModel)]="formData['torque-min']">
+      </div>
+      <span style="margin-right: 10px;">-</span>
+      <div class="input-max">
+        <label>Max</label>
+        <input type="number" name="torque-max" [(ngModel)]="formData['torque-max']">
+      </div>
+    </div>
+  </div>
+
+  <div class="single-container">
+    <h3>Tool wear</h3>
+    <div class="input-container">
+      <div class="input-min">
+        <label>Min</label>
+        <input type="number" name="toolwear-min" [(ngModel)]="formData['toolwear-min']">
+      </div>
+      <span style="margin-right: 10px;">-</span>
+      <div class="input-max">
+        <label>Max</label>
+        <input type="number" name="toolwear-max" [(ngModel)]="formData['toolwear-max']">
+      </div>
+    </div>
+  </div>
+
+  <button class="config-submit" type="submit">Submit</button>
+</form>
+
+
+
+
+<h3 *ngIf="response" class="title">Machine Sensor Reading</h3>
+
+<div *ngIf="response" class="reading-values">
+  <div class="input-value">
+    <div class="gauge-container">
+      <ngx-gauge class="guage" [type]="airTempgaugeType" [value]="airTempgaugeValue" [label]="airTempgaugeLabel"
+        [append]="airTempgaugeAppendText" [min]="airTempgaugeMinValue" [max]="airTempgaugeMaxValue"
+        [thresholds]="airTempthresholdConfig" [size]="250" [markers]="airTempmarkers" [margin]="30" [thick]="10">
+      </ngx-gauge>
+    </div>
+  </div>
+
+  <div class="input-value">
+    <!-- <h1>
+    Welcome to {{ title }}!
+  </h1> -->
+    <div class="gauge-container">
+      <ngx-gauge class="guage" [type]="processTempgaugeType" [value]="processTempgaugeValue"
+        [label]="processTempgaugeLabel" [append]="processTempgaugeAppendText" [min]="processTempgaugeMinValue"
+        [max]="processTempgaugeMaxValue" [thresholds]="processTempthresholdConfig" [markers]="processTempmarkers"
+        [size]="250" [margin]="30" [thick]="10">
+      </ngx-gauge>
+    </div>
+  </div>
+
+  <div class="input-value">
+    <!-- <h1>
+    Welcome to {{ title }}!
+  </h1> -->
+    <div class="guage-container">
+      <ngx-gauge class="guage" [type]="rotationalSpeedgaugeType" [value]="rotationalSpeedgaugeValue"
+        [label]="rotationalSpeedgaugeLabel" [append]="rotationalSpeedgaugeAppendText"
+        [min]="rotationalSpeedgaugeMinValue" [max]="rotationalSpeedgaugeMaxValue"
+        [thresholds]="rotationalSpeedthresholdConfig" [markers]="rotationalSpeedmarkers" [size]="250" [margin]="30"
+        [thick]="10">
+      </ngx-gauge>
+    </div>
+  </div>
+
+  <div class="input-value">
+    <!-- <h1>
+    Welcome to {{ title }}!
+  </h1> -->
+    <div class="gauge-container">
+      <ngx-gauge class="guage" [type]="torquegaugeType" [value]="torquegaugeValue" [label]="torquegaugeLabel"
+        [append]="torquegaugeAppendText" [min]="torquegaugeMinValue" [max]="torquegaugeMaxValue"
+        [thresholds]="torquethresholdConfig" [markers]="torquemarkers" [size]="250" [margin]="30" [thick]="10">
+      </ngx-gauge>
+    </div>
+  </div>
+
+  <div class="input-value">
+    <!-- <h1>
+    Welcome to {{ title }}!
+  </h1> -->
+    <div class="gauge-container">
+      <ngx-gauge class="guage" [type]="toolWeargaugeType" [value]="toolWeargaugeValue" [label]="toolWeargaugeLabel"
+        [append]="toolWeargaugeAppendText" [min]="toolWeargaugeMinValue" [max]="toolWeargaugeMaxValue"
+        [thresholds]="toolWearthresholdConfig" [markers]="toolWearmarkers" [size]="250" [margin]="30" [thick]="10">
+      </ngx-gauge>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="response && response.alerts"  class="result-container">
+  <div *ngIf="response && response.alerts"  class="result">
+    <h3>Alerts:</h3>
+    <ul>
+      <li *ngFor="let alert of response.alerts">{{ alert }}</li>
+    </ul>
+    <div class="general-detail">Please do service</div>
+  </div>  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <form class="form-container" #predictionForm="ngForm" (ngSubmit)="onFormSubmitted(predictionForm)">
+  <div class="single-container">
+    <h3>Air temperature</h3>
+    <div class="input-container">
+      <div class="input-min">
+        <label>Min</label>
+        <input type="number"  name="air-temperature-min"  ngModel>
+      </div>
+      <span style="margin-right: 10px;">-</span>
+      <div class="input-max">
+        <label>Max</label>
+        <input type="number" name="air-temperature-max" ngModel>
+      </div>
+    </div>
+  </div>
+
+  <div class="single-container">
+    <h3>Process temperature</h3>
+    <div class="input-container">
+      <div class="input-min">
+        <label>Min</label>
+        <input type="number"  name="process-temperature-min"  ngModel>
+      </div>
+      <span style="margin-right: 10px;">-</span>
+      <div class="input-max">
+        <label>Max</label>
+        <input type="number" name="process-temperature-max" ngModel>
+      </div>
+    </div>
+  </div>
+
+  <div class="single-container">
+    <h3>Rotational speed</h3>
+    <div class="input-container">
+      <div class="input-min">
+        <label>Min</label>
+        <input type="number"  name="rotational-speed-min"  ngModel>
+      </div>
+      <span style="margin-right: 10px;">-</span>
+      <div class="input-max">
+        <label>Max</label>
+        <input type="number" name="rotational-speed-max" ngModel>
+      </div>
+    </div>
+  </div>
+
+  <div class="single-container">
+    <h3>Torque</h3>
+    <div class="input-container">
+      <div class="input-min">
+        <label>Min</label>
+        <input type="number"  name="torqe-min"  ngModel>
+      </div>
+      <span style="margin-right: 10px;">-</span>
+      <div class="input-max">
+        <label>Max</label>
+        <input type="number" name="torqe-max" ngModel>
+      </div>
+    </div>
+  </div>
+
+  <div class="single-container">
+    <h3>Tool wear</h3>
+    <div class="input-container">
+      <div class="input-min">
+        <label>Min</label>
+        <input type="number"  name="toolwear-min"  ngModel>
+      </div>
+      <span style="margin-right: 10px;">-</span>
+      <div class="input-max">
+        <label>Max</label>
+        <input type="number" name="toolwear-max" ngModel>
+      </div>
+    </div>
+  </div>
+
+
+  
+  <button class="config-submit" type="submit">Submit</button>
+
+</form>  -->
+
+
+
+
+
+
+<!-- <form class="wrapper" #predictionForm="ngForm" (ngSubmit)="onFormSubmitted(predictionForm)">
+  <div>
+    <header>
+      <h2>Air temperature</h2>
+      <p>Use slider or enter min and max Air temperature</p>
+    </header>
+    <div class="price-input">
+      <div class="field">
+        <span>Min</span>
+        <input type="number" class="input-min" name="air-temperature-min"  ngModel>
+      </div>
+      <div class="separator">-</div>
+      <div class="field">
+        <span>Max</span>
+        <input type="number" class="input-max"  name="air-temperature-max"  ngModel>
+      </div>
+    </div>
+  </div>
+    
+  <div>
+    <header>
+      <h2>Process temperature</h2>
+      <p>Use slider or enter min and max Process temperature</p>
+    </header>
+    <div class="price-input">
+      <div class="field">
+        <span>Min</span>
+        <input type="number" class="input-min" name="process-temperature-min"  ngModel>
+      </div>
+      <div class="separator">-</div>
+      <div class="field">
+        <span>Max</span>
+        <input type="number" class="input-max"  name="process-temperature-max"  ngModel>
+      </div>
+    </div>
+  </div>
+        
+  <button type="submit">Submit</button>
+  </form>
+-->
+
+
+
+
+
+<!-- <form class="wrapper" #predictionForm="ngForm" (ngSubmit)="onFormSubmitted(predictionForm)">
+    <header>
+      <h2>Air temperature</h2>
+      <p>Use slider or enter min and max Air temperature</p>
+    </header>
+    <div class="price-input">
+      <div class="field">
+        <span>Min</span>
+        <input type="number" class="input-min" name="air-temperature-min"  [(ngModel)]="airTemperatureMin">
+      </div>
+      <div class="separator">-</div>
+      <div class="field">
+        <span>Max</span>
+        <input type="number" class="input-max"  name="air-temperature-max"  [(ngModel)]="airTemperatureMax">
+      </div>
+    </div>
+    <div class="slider">
+      <div class="progress"></div>
+    </div>
+    <div class="range-input">
+      <input type="range" class="range-min" min="0" max="500"  step="10"  name="air-temperature-min-range"  [(ngModel)]="airTemperatureMin">
+      <input type="range" class="range-max" min="0" max="500"  step="10"  name="air-temperature-max-range" [(ngModel)]="airTemperatureMax" >
+    </div>
+
+    <button type="submit">Submit</button>
+</form> -->
+
+
+
+<!-- <form class="wrapper" #predictionForm="ngForm" (ngSubmit)="onFormSubmitted(predictionForm)">
+  <header>
+    <h2>Air temperature</h2>
+    <p>Use slider or enter min and max Air temperature</p>
+  </header>
+  <div class="price-input">
+    <div class="field">
+      <span>Min</span>
+      <input type="number" class="input-min" [(ngModel)]="airTemperatureMin" name="air-temperature-min" (ngModelChange)="updateProgress()">
+    </div>
+    <div class="separator">-</div>
+    <div class="field">
+      <span>Max</span>
+      <input type="number" class="input-max" [(ngModel)]="airTemperatureMax" name="air-temperature-max" (ngModelChange)="updateProgress()">
+    </div>
+  </div>
+  <div class="slider">
+    <div class="progress" [style.left.%]="progressLeft" [style.right.%]="progressRight"></div>
+  </div>
+  <div class="range-input">
+    <input type="range" class="range-min" min="0" max="500" step="10" [(ngModel)]="airTemperatureMin" name="air-temperature-min-range" (ngModelChange)="updateProgress()">
+    <input type="range" class="range-max" min="0" max="500" step="10" [(ngModel)]="airTemperatureMax" name="air-temperature-max-range" (ngModelChange)="updateProgress()">
+  </div>
+
+  <button type="submit">Submit</button>
+</form> -->
+<!-- 
+<form class="wrapper" #predictionForm="ngForm" (ngSubmit)="onFormSubmitted(predictionForm)">
+  <header>
+    <h2>Air temperature</h2>
+    <p>Use slider or enter min and max Air temperature</p>
+  </header>
+  <div class="price-input">
+    <div class="field">
+      <span>Min</span>
+      <input type="number" class="input-min" [(ngModel)]="airTemperatureMin" name="air-temperature-min" (ngModelChange)="onMinInputChange($event)">
+    </div>
+    <div class="separator">-</div>
+    <div class="field">
+      <span>Max</span>
+      <input type="number" class="input-max" [(ngModel)]="airTemperatureMax" name="air-temperature-max" (ngModelChange)="onMaxInputChange($event)">
+    </div>
+  </div>
+  <div class="slider">
+    <div class="progress" [style.left.%]="progressLeft" [style.right.%]="progressRight"></div>
+  </div>
+  <div class="range-input">
+    <input type="range" class="range-min" min="0" max="500" step="10" [(ngModel)]="airTemperatureMin" name="air-temperature-min-range" (input)="onMinRangeChange($event)">
+    <input type="range" class="range-max" min="0" max="500" step="10" [(ngModel)]="airTemperatureMax" name="air-temperature-max-range" (input)="onMaxRangeChange($event)">
+  </div>
+
+  <button type="submit">Submit</button>
+</form> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- name="air-temperature-min" ngModel -->
+<!-- <header>
+      <h2>process temperature</h2>
+      <p>Use slider or enter min and max Air temperature</p>
+    </header>
+    <div class="price-input">
+      <div class="field">
+        <span>Min</span>
+        <input type="number" class="input-min" value="100" >
+      </div>
+      <div class="separator">-</div>
+      <div class="field">
+        <span>Max</span>
+        <input type="number" class="input-max" value="300">
+      </div>
+    </div>
+    <div class="slider">
+      <div class="progress"></div>
+    </div>
+    <div class="range-input">
+      <input type="range" class="range-min" min="0" max="500" value="100" step="10">
+      <input type="range" class="range-max" min="0" max="500" value="300" step="10">
+    </div> -->

@@ -1,0 +1,79 @@
+.title{
+    text-align: center; 
+    margin-top:30px;
+    font-style: italic;
+    color:hsl(360,99%,31%);
+}
+
+
+.reading-values{
+    margin-top: 30px;
+    margin-left: 20px;
+    margin-right: 20px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.input-value{
+    border: 3px solid hsl(224, 10%, 79%);
+    display: flex;
+    border-radius: 5px;
+    /* width: 300px;
+    height: 350px; */
+
+}
+
+.gauge-container{
+
+    /* width: 300px; */
+    width: 100%;
+    /* margin: auto; */
+
+}
+
+.guage{
+    margin: 20px 20px;
+}
+
+/* .reading-block{
+    font-size: 20px !important;
+} */
+
+
+.result-container{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.failure-info{
+    background-color: hsl(360,99%,31%);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.alert-tilte{
+    text-align: center;
+}
+
+.no-failure-info{
+    background-color: hsl(120,100%,27%);
+    padding: 20px;
+    color: white;
+    border-radius: 10px;
+}
+
+.result-info{
+    /* margin-bottom: 10px; */
+    margin-top: 10px;
+}
+
+.prediction-title{
+    text-align: center; 
+    margin-top:50px;
+    font-style: italic;
+    color:hsl(360,99%,31%);
+}
