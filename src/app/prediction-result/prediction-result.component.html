@@ -34,7 +34,7 @@
 
 <!-- src/app/app.component.html -->
 
-<h3 class="title">Machine Sensor Reading</h3>
+<h3 class="title">Machine Sensor Monitoring</h3>
 
 <div class="reading-values">
   <div class="input-value">
@@ -98,19 +98,87 @@
   </div>
 </div>
 
-<h3 class="prediction-title">Prediction</h3>
 
-<div class="result-container">
-  <div *ngIf="failure_type!='No Failure'" class="failure-info">
-    <div class="alert-tilte">Alert <i class="fa-light fa-sensor-triangle-exclamation"></i></div>
-    <div class="result-info"><span style="font-weight: bold;">{{failure_type}}</span> occured on {{reading_date}} at {{reading_time}}</div>
-    <div class="result-info">Priority Level:<span style="font-weight: bold;">{{priority}}</span></div>
-    <div class="result-info">Schedule Maintenance within <span style="font-weight: bold;">{{days_for_maintenance}}</span> </div>
+<div class="result-overall-container">
+  <div class="result-container">
+    <h3 class="prediction-title">Prediction</h3>
+    <div *ngIf="failure_type!='No Failure'" class="failure-info">
+      <div class="alert-tilte">Alert <i class="fa-light fa-sensor-triangle-exclamation"></i></div>
+      <div class="result-info"><span style="font-weight: bold;">{{failure_type}}</span> occured on {{reading_date}} at
+        {{reading_time}}</div>
+      <div class="result-info">Priority Level:<span style="font-weight: bold;">{{priority}}</span></div>
+      <div class="result-info">Schedule Maintenance within <span
+          style="font-weight: bold;">{{days_for_maintenance}}</span> </div>
+    </div>
+
+    <div class="no-failure-info" *ngIf="failure_type==='No Failure'">
+      <div>Regular maintenance should be performed on <span style="font-weight: bold;">{{days_for_maintenance}}</span>
+      </div>
+    </div>
   </div>
 
-  <div class="no-failure-info" *ngIf="failure_type==='No Failure'">
-    <div>Regular maintenance should be performed on <span style="font-weight: bold;">{{days_for_maintenance}}</span></div>
+
+  <div class="failure-table">
+    <h3 class="prediction-title">Failure History</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Failure Type</th>
+          <th>Priority</th>
+          <th>Reading Date</th>
+          <th>Reading Time</th>
+          <th>Days for Maintenance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let failure of latestFiveFailure">
+          <td>{{ failure["failure_type"] }}</td>
+          <td>{{ failure["priority"] }}</td>
+          <td>{{ failure["reading_date"] }}</td>
+          <td>{{ failure["reading_time"] }}</td>
+          <td>{{ failure["days_for_maintenance"] }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-
-
 </div>
+
+
+
+
+<!-- <div class="result-container">
+  <div *ngIf="failure_type!='No Failure'" class="failure-info">
+    <div *ngFor="let failure of lastestFiveFailure">
+      <div class="alert-tilte">Alert <i class="fa-light fa-sensor-triangle-exclamation"></i></div>
+      <div class="result-info"><span style="font-weight: bold;">{{failure["failure_type"]}}</span> occured on {{failure["DateTime"]}} at
+        {{failure["reading_time"]}}</div>
+      <div class="result-info">Priority Level:<span style="font-weight: bold;">{{failure["priority"]}}</span></div>
+      <div class="result-info">Schedule Maintenance within <span
+          style="font-weight: bold;">{{failure["maintenance_time"]}}</span> </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- <div class="failure-table">
+  <h2>Maintenance Data</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Failure Type</th>
+        <th>Priority</th>
+        <th>Reading Date</th>
+        <th>Reading Time</th>
+        <th>Days for Maintenance</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let failure of latestFiveFailure">
+        <td>{{ failure["failure_type"] }}</td>
+        <td>{{ failure["priority"] }}</td>
+        <td>{{ failure["reading_date"] }}</td>
+        <td>{{ failure["reading_time"] }}</td>
+        <td>{{ failure["days_for_maintenance"] }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div> -->

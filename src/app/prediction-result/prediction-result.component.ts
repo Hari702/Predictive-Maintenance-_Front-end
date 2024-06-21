@@ -28,79 +28,13 @@ export class PredictionResultComponent implements AfterViewInit {
   predictions: PredictionResponse[] = [];
   // constructor(private socketService: SocketService) {}
   constructor(private csvDataService: CsvDataService,private http: HttpClient, private zone: NgZone,private el: ElementRef, private renderer: Renderer2) {  }
-  // rows: any[] = [];
-
-  // ngOnInit(): void {
-    // this.http.get("http://127.0.0.1:5000/values").subscribe((res:any)=>{
-    //   // console.log(res["priority"])
-
-
-    //   this.priority=res["priority"]
-    //   this.failure_type=res["failue_type"]
-    //   this.days_for_maintenance=res["days_for_maintenance"]
-
-    // })
-
-
-    // this.http.get("http://127.0.0.1:5000/prediction").subscribe((res:any)=>{
-    //   console.log(res)
-    //   this.priority=res["priority"]
-    //   this.failure_type=res["failue_type"]
-    //   this.days_for_maintenance=res["days_for_maintenance"]
-
-    // })
-
-    // this.socketService.getPredictionUpdates().subscribe((data: any) => {
-    //   this.predictions.push(data);
-    //   console.log("hello")
-    // });
-
-    // this.socket.on('new_prediction', (data: PredictionResponse) => {
-    //   console.log('Received new prediction:', data);
-    //   this.predictions.push(data);
-    // });
-
-    // this.socket.fromEvent("new_prediction").subscribe((res)=>{
-    //   console.log(res)
-    // })
-/*
-  rows: any[] = [];
-  error: string | null = null;
-
- 
-
-  ngOnInit(): void {
-    this.getNextRow();
-  }
-
-  getNextRow(): void {
-    this.csvDataService.getNextRow().subscribe(
-      (data) => {
-        console.log(data)
-        this.rows.push(data);
-        this.getNextRow();  // Automatically fetch the next row
-      },
-      (error) => {
-        this.error = 'All rows fetched or an error occurred';
-        console.error('Error fetching next row', error);
-      }
-    );
-  }
-*/
-   
-  // }
-
-
   
-
-  // constructor(private http: HttpClient, private zone: NgZone) {}
-
   response: any
-  // title = 'temperature-meter';
+  latestFiveFailure:any[]=[]
+
   airTempgaugeValue: number = 0;
   airTempgaugeLabel = "Air Temp";
   airTempgaugeAppendText = "K";
-  // gaugeType = "semi";
   airTempgaugeType: NgxGaugeType = 'arch';
   airTempgaugeMinValue: number = 0; 
   airTempgaugeMaxValue: number = 500;
@@ -122,13 +56,6 @@ export class PredictionResultComponent implements AfterViewInit {
   }
 
   
-
-
-
-
-
-
-  // title = 'temperature-meter';
   processTempgaugeValue: number = 0;
   processTempgaugeLabel = "Process Temp";
   processTempgaugeAppendText = "K";
@@ -251,12 +178,31 @@ export class PredictionResultComponent implements AfterViewInit {
         // console.log(event)
         this.response = JSON.parse(event.data);
         // console.log(this.response);
+        
+        const failureEntry = {
+          failure_type: this.response["failure_type"],
+          priority: this.response["priority"],
+          reading_date: this.response["DateTime"],
+          reading_time: this.response["Reading time"],
+          days_for_maintenance: this.response["maintenance_time"]
+        };
 
         this.failure_type=this.response["failure_type"]
         this.priority=this.response["priority"]
         this.reading_date=this.response["DateTime"]
         this.reading_time=this.response["Reading time"]
         this.days_for_maintenance=this.response["maintenance_time"]
+
+
+        if(this.response["failure_type"]!=="No Failure"){
+            this.latestFiveFailure.unshift(failureEntry)
+        }
+
+        if (this.latestFiveFailure.length > 5) {
+          this.latestFiveFailure.pop();
+        }
+
+        console.log(this.latestFiveFailure)
         
         if (this.response && this.response["Air temperature"]) {
           this.airTempgaugeValue = parseInt(this.response["Air temperature"]);

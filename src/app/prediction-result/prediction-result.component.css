@@ -1,7 +1,7 @@
 .title{
     text-align: center; 
     margin-top:30px;
-    font-style: italic;
+    /* font-style: italic; */
     color:hsl(360,99%,31%);
 }
 
@@ -16,9 +16,12 @@
 }
 
 .input-value{
+    width: 250px;
+    background-color: hsl(15,80%,96%);
     border: 3px solid hsl(224, 10%, 79%);
     display: flex;
     border-radius: 5px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     /* width: 300px;
     height: 350px; */
 
@@ -32,14 +35,20 @@
 
 }
 
-.guage{
+/* .guage{
     margin: 20px 20px;
-}
+} */
 
 /* .reading-block{
     font-size: 20px !important;
 } */
 
+
+.result-overall-container{
+    display: flex;
+    justify-content: space-evenly;
+
+}
 
 .result-container{
     margin-top: 50px;
@@ -73,7 +82,31 @@
 
 .prediction-title{
     text-align: center; 
-    margin-top:50px;
+    margin-bottom: 20px;
     font-style: italic;
     color:hsl(360,99%,31%);
 }
+
+
+.failure-table{
+    width: 600px;
+    margin-top: 50px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+
+  tr:nth-child(odd) {
+    background-color: hsl(15,80%,96%);
+  }
