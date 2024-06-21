@@ -1,14 +1,216 @@
-<!-- <div>
+<div class="config-grid-container">
 
-  <div>
+  <div class="config-input-container">
+    <div class="config-title">Machine Sensor Configuration</div>
+
+    <form class="form-container" #predictionForm="ngForm" (ngSubmit)="onFormSubmitted(predictionForm)">
+      <div class="overall-container">
+        <!-- <div class="individual">
+          <h3>Air Temperature</h3>
+          <div class="input-container">
+            <div class="input-min">
+              <label>Min</label>
+              <input type="number" name="air-temperature-min" [(ngModel)]="formData['air-temperature-min']">
+            </div>
+            <span style="margin-right: 10px;">-</span>
+            <div class="input-max">
+              <label>Max</label>
+              <input type="number" name="air-temperature-max" [(ngModel)]="formData['air-temperature-max']">
+            </div>
+          </div>
+        </div> -->
+
+
+
+        <div class="individual">
+          <h3>Process Temp</h3>
+          <div class="input-container">
+            <div class="input-min">
+              <label>Min</label>
+              <input type="number" name="process-temperature-min" [(ngModel)]="formData['process-temperature-min']">
+            </div>
+            <span style="margin-right: 10px;">-</span>
+            <div class="input-max">
+              <label>Max</label>
+              <input type="number" name="process-temperature-max" [(ngModel)]="formData['process-temperature-max']">
+            </div>
+          </div>
+        </div>
+
+        <div class="individual">
+          <h3>Rotational Speed</h3>
+          <div class="input-container">
+            <div class="input-min">
+              <label>Min</label>
+              <input type="number" name="rotational-speed-min" [(ngModel)]="formData['rotational-speed-min']">
+            </div>
+            <span style="margin-right: 10px;">-</span>
+            <div class="input-max">
+              <label>Max</label>
+              <input type="number" name="rotational-speed-max" [(ngModel)]="formData['rotational-speed-max']">
+            </div>
+          </div>
+        </div>
+
+
+        <div class="individual">
+          <h3>Torque</h3>
+          <div class="input-container">
+            <div class="input-min">
+              <label>Min</label>
+              <input type="number" name="torque-min" [(ngModel)]="formData['torque-min']">
+            </div>
+            <span style="margin-right: 10px;">-</span>
+            <div class="input-max">
+              <label>Max</label>
+              <input type="number" name="torque-max" [(ngModel)]="formData['torque-max']">
+            </div>
+          </div>
+        </div>
+
+        <div class="individual">
+          <h3>Tool Wear</h3>
+          <div class="input-container">
+            <div class="input-min">
+              <label>Min</label>
+              <input type="number" name="toolwear-min" [(ngModel)]="formData['toolwear-min']">
+            </div>
+            <span style="margin-right: 10px;">-</span>
+            <div class="input-max">
+              <label>Max</label>
+              <input type="number" name="toolwear-max" [(ngModel)]="formData['toolwear-max']">
+            </div>
+          </div>
+        </div>
+
+        <button class="config-submit" type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+
+
+  <div class="loading-spinner" *ngIf="!response">
+    <div class="spinner">
+      Loading
+      <div class="spinner-sector spinner-sector-red"></div>
+      <div class="spinner-sector spinner-sector-blue"></div>
+      <div class="spinner-sector spinner-sector-green"></div>
+    </div>
+  </div>
+
+  <div *ngIf="response">
+
+    <h3 *ngIf="response" class="title">Machine Sensor Monitoring</h3>
+
+    <div *ngIf="response" class="reading-values">
+      <!-- <div class="input-value">
+        <div class="gauge-container">
+          <ngx-gauge class="guage" [type]="airTempgaugeType" [value]="airTempgaugeValue" [label]="airTempgaugeLabel"
+            [append]="airTempgaugeAppendText" [min]="airTempgaugeMinValue" [max]="airTempgaugeMaxValue"
+            [thresholds]="airTempthresholdConfig" [size]="250" [markers]="airTempmarkers" [margin]="30" [thick]="10">
+          </ngx-gauge>
+        </div>
+      </div> -->
+
+      <div class="input-value">
+        <div class="gauge-container">
+          <ngx-gauge class="guage" [type]="processTempgaugeType" [value]="processTempgaugeValue"
+            [label]="processTempgaugeLabel" [append]="processTempgaugeAppendText" [min]="processTempgaugeMinValue"
+            [max]="processTempgaugeMaxValue" [thresholds]="processTempthresholdConfig" [markers]="processTempmarkers"
+            [size]="250" [margin]="30" [thick]="10">
+          </ngx-gauge>
+        </div>
+      </div>
+
+      <div class="input-value">
+        <!-- <h1>
+    Welcome to {{ title }}!
+    </h1> -->
+        <div class="guage-container">
+          <ngx-gauge class="guage" [type]="rotationalSpeedgaugeType" [value]="rotationalSpeedgaugeValue"
+            [label]="rotationalSpeedgaugeLabel" [append]="rotationalSpeedgaugeAppendText"
+            [min]="rotationalSpeedgaugeMinValue" [max]="rotationalSpeedgaugeMaxValue"
+            [thresholds]="rotationalSpeedthresholdConfig" [markers]="rotationalSpeedmarkers" [size]="250" [margin]="30"
+            [thick]="10">
+          </ngx-gauge>
+        </div>
+      </div>
+
+      <div class="input-value">
+        <!-- <h1>
+    Welcome to {{ title }}!
+     </h1> -->
+        <div class="gauge-container">
+          <ngx-gauge class="guage" [type]="torquegaugeType" [value]="torquegaugeValue" [label]="torquegaugeLabel"
+            [append]="torquegaugeAppendText" [min]="torquegaugeMinValue" [max]="torquegaugeMaxValue"
+            [thresholds]="torquethresholdConfig" [markers]="torquemarkers" [size]="250" [margin]="30" [thick]="10">
+          </ngx-gauge>
+        </div>
+      </div>
+
+      <div class="input-value">
+        <!-- <h1>
+    Welcome to {{ title }}!
+     </h1> -->
+        <div class="gauge-container">
+          <ngx-gauge class="guage" [type]="toolWeargaugeType" [value]="toolWeargaugeValue" [label]="toolWeargaugeLabel"
+            [append]="toolWeargaugeAppendText" [min]="toolWeargaugeMinValue" [max]="toolWeargaugeMaxValue"
+            [thresholds]="toolWearthresholdConfig" [markers]="toolWearmarkers" [size]="250" [margin]="30" [thick]="10">
+          </ngx-gauge>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="alert-icon" *ngIf="displayIcon && response.alerts.length>0"><fa-icon class="icon" (click)="onIconClick()" [icon]="warningIcon"></fa-icon></div>
+    <div class="result-overall-container">
+      <div *ngIf="response && response.alerts.length>0 && displayResult" class="result-container">
+      
+        <div *ngIf="response && response.alerts" class="result">
+          <div class="title-alert-container">
+            <h4 class="title-alert">Alerts ({{response.alerts.length}})</h4>
+          </div>
+          
+          <!-- <ul>
+            <li *ngFor="let alert of response.alerts">{{ alert }}</li>
+          </ul> -->
+           <div class="result-details" *ngFor="let alert of response.alerts">{{ alert }}</div>
+          <!-- <div class="general-detail">Please do service</div> -->
+        </div>
+      </div>
+
+      <div *ngIf="response && response.alerts.length>0 && displayResult" class="advisory-container">
+      
+        <div *ngIf="response && response.alerts" class="result">
+          <div class="title-alert-container">
+            <h4 class="title-alert">Advisories ({{response.advisories.length}})</h4>
+          </div>
+          
+          <!-- <ul>
+            <li *ngFor="let alert of response.alerts">{{ alert }}</li>
+          </ul> -->
+           <div class="result-details" *ngFor="let advisory of response.advisories">{{ advisory }}</div>
+        </div>
+      </div>
+    </div>
+    
+ 
 
   </div>
 
-</div> -->
+</div>
 
 
 
-<div class="title">Configure sensor reading</div>
+
+
+
+
+
+
+
+<!-- <div class="title">Configure sensor reading</div>
 
 <form class="form-container" #predictionForm="ngForm" (ngSubmit)="onFormSubmitted(predictionForm)">
   <div class="single-container">
@@ -87,12 +289,12 @@
   </div>
 
   <button class="config-submit" type="submit">Submit</button>
-</form>
+</form> -->
 
 
 
 
-<h3 *ngIf="response" class="title">Machine Sensor Reading</h3>
+<!-- <h3 *ngIf="response" class="title">Machine Sensor Reading</h3>
 
 <div *ngIf="response" class="reading-values">
   <div class="input-value">
@@ -105,9 +307,7 @@
   </div>
 
   <div class="input-value">
-    <!-- <h1>
-    Welcome to {{ title }}!
-  </h1> -->
+    
     <div class="gauge-container">
       <ngx-gauge class="guage" [type]="processTempgaugeType" [value]="processTempgaugeValue"
         [label]="processTempgaugeLabel" [append]="processTempgaugeAppendText" [min]="processTempgaugeMinValue"
@@ -118,9 +318,7 @@
   </div>
 
   <div class="input-value">
-    <!-- <h1>
-    Welcome to {{ title }}!
-  </h1> -->
+    
     <div class="guage-container">
       <ngx-gauge class="guage" [type]="rotationalSpeedgaugeType" [value]="rotationalSpeedgaugeValue"
         [label]="rotationalSpeedgaugeLabel" [append]="rotationalSpeedgaugeAppendText"
@@ -132,9 +330,7 @@
   </div>
 
   <div class="input-value">
-    <!-- <h1>
-    Welcome to {{ title }}!
-  </h1> -->
+   
     <div class="gauge-container">
       <ngx-gauge class="guage" [type]="torquegaugeType" [value]="torquegaugeValue" [label]="torquegaugeLabel"
         [append]="torquegaugeAppendText" [min]="torquegaugeMinValue" [max]="torquegaugeMaxValue"
@@ -144,9 +340,7 @@
   </div>
 
   <div class="input-value">
-    <!-- <h1>
-    Welcome to {{ title }}!
-  </h1> -->
+    
     <div class="gauge-container">
       <ngx-gauge class="guage" [type]="toolWeargaugeType" [value]="toolWeargaugeValue" [label]="toolWeargaugeLabel"
         [append]="toolWeargaugeAppendText" [min]="toolWeargaugeMinValue" [max]="toolWeargaugeMaxValue"
@@ -157,15 +351,15 @@
 </div>
 
 
-<div *ngIf="response && response.alerts"  class="result-container">
-  <div *ngIf="response && response.alerts"  class="result">
+<div *ngIf="response && response.alerts" class="result-container">
+  <div *ngIf="response && response.alerts" class="result">
     <h3>Alerts:</h3>
     <ul>
       <li *ngFor="let alert of response.alerts">{{ alert }}</li>
     </ul>
     <div class="general-detail">Please do service</div>
-  </div>  
-</div>
+  </div>
+</div> -->
 
 
 

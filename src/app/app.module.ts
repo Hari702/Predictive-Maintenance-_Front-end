@@ -13,6 +13,7 @@ import { PredictionResultComponent } from './prediction-result/prediction-result
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { NgxGaugeModule } from 'ngx-gauge';
 import { ConfigurationComponent } from './configuration/configuration.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -42,7 +43,8 @@ import { ConfigurationComponent } from './configuration/configuration.component'
     // RouterModule.forRoot(routes),
     HttpClientModule,
     FormsModule,
-    NgxGaugeModule
+    NgxGaugeModule,
+    FontAwesomeModule
     // SocketIoModule.forRoot(config)
   ],
   providers: [],

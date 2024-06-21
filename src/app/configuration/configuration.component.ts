@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { AfterViewInit, ChangeDetectorRef, Component, NgZone, OnInit, inject } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, NgZone, OnInit, Renderer2, inject } from '@angular/core';
 import { NgForm, NgModel } from '@angular/forms';
 import { FormDataService } from '../form-data.service';
 import { NgxGaugeType } from 'ngx-gauge/gauge/gauge';
+import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'; 
  // Adjust the import path accordingly
 
 @Component({
@@ -10,7 +11,7 @@ import { NgxGaugeType } from 'ngx-gauge/gauge/gauge';
   templateUrl: './configuration.component.html',
   styleUrl: './configuration.component.css'
 })
-export class ConfigurationComponent {
+export class ConfigurationComponent implements OnInit {
   /*  
     rangeInput:any
     priceInput:any
@@ -165,6 +166,10 @@ export class ConfigurationComponent {
   }
 
   */
+
+
+  // fontawesome
+  warningIcon=faTriangleExclamation;
 
 
 
@@ -329,14 +334,20 @@ export class ConfigurationComponent {
   };
 
 
-  constructor(private formDataService: FormDataService,private zone: NgZone) {}
+  constructor(private formDataService: FormDataService,private zone: NgZone,private el: ElementRef, private renderer: Renderer2) {}
 
   ngOnInit() {
     // this.formData = this.formDataService.getFormData() || {};
     const savedFormData = this.formDataService.getFormData();
     this.formData = savedFormData ? savedFormData : { ...this.defaultValues };
   }
+ 
+  
+  ngAfterViewInit() {
+    this.setGaugeValueStyle();
+  }
 
+  
   
   // response: any
 
@@ -389,14 +400,40 @@ export class ConfigurationComponent {
     console.log(form.value);
     this.http.post("http://127.0.0.1:5000/config",form.value).subscribe((res:any)=>{
       console.log(res)
-      
+      this.setGaugeValueStyle();
     })
     this.formDataService.setFormData(form.value);
 
     this.getMaintenanceData()
-    
 
   }
+
+  setGaugeValueStyle() {
+    
+    this.el.nativeElement.querySelectorAll(".reading-block").forEach((element:any)=>{
+
+      if(element){
+        this.renderer.setStyle(element,"font-size",'30px')
+      }
+
+    })
+  }
+
+  displayResult:boolean=false
+  displayIcon:boolean=true
+
+  onIconClick(){
+    console.log("icon clicked")
+    this.displayResult=true
+    this.displayIcon=false
+  }
+
+
+
+
+
+  
+
 }
 
 
