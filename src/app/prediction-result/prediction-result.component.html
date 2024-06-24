@@ -34,7 +34,144 @@
 
 <!-- src/app/app.component.html -->
 
-<h3 class="title">Machine Sensor Monitoring</h3>
+<div class="prediction-overall-container" id="prediction-overall-container-id">
+  <div class="title-failure-history-container">
+    <h3 class="title">Machine Sensor Monitoring</h3>
+    <button class="failure-history-btn" (click)="blurFunction()"><fa-icon [icon]="circleImportantIcon"></fa-icon> Failure History</button>
+  </div>
+ 
+  
+
+  <div class="reading-values">
+    <div class="input-value">
+      <div class="gauge-container">
+        <ngx-gauge class="guage" [type]="airTempgaugeType" [value]="airTempgaugeValue" [label]="airTempgaugeLabel"
+          [append]="airTempgaugeAppendText" [min]="airTempgaugeMinValue" [max]="airTempgaugeMaxValue"
+          [thresholds]="airTempthresholdConfig" [size]="250" [markers]="airTempmarkers" [margin]="30" [thick]="10">
+        </ngx-gauge>
+      </div>
+    </div>
+
+    <div class="input-value">
+      <!-- <h1>
+    Welcome to {{ title }}!
+  </h1> -->
+      <div class="gauge-container">
+        <ngx-gauge class="guage" [type]="processTempgaugeType" [value]="processTempgaugeValue"
+          [label]="processTempgaugeLabel" [append]="processTempgaugeAppendText" [min]="processTempgaugeMinValue"
+          [max]="processTempgaugeMaxValue" [thresholds]="processTempthresholdConfig" [markers]="processTempmarkers"
+          [size]="250" [margin]="30" [thick]="10">
+        </ngx-gauge>
+      </div>
+    </div>
+
+    <div class="input-value">
+      <!-- <h1>
+    Welcome to {{ title }}!
+  </h1> -->
+      <div class="guage-container">
+        <ngx-gauge class="guage" [type]="rotationalSpeedgaugeType" [value]="rotationalSpeedgaugeValue"
+          [label]="rotationalSpeedgaugeLabel" [append]="rotationalSpeedgaugeAppendText"
+          [min]="rotationalSpeedgaugeMinValue" [max]="rotationalSpeedgaugeMaxValue"
+          [thresholds]="rotationalSpeedthresholdConfig" [markers]="rotationalSpeedmarkers" [size]="250" [margin]="30"
+          [thick]="10">
+        </ngx-gauge>
+      </div>
+    </div>
+
+    <div class="input-value">
+      <!-- <h1>
+    Welcome to {{ title }}!
+  </h1> -->
+      <div class="gauge-container">
+        <ngx-gauge class="guage" [type]="torquegaugeType" [value]="torquegaugeValue" [label]="torquegaugeLabel"
+          [append]="torquegaugeAppendText" [min]="torquegaugeMinValue" [max]="torquegaugeMaxValue"
+          [thresholds]="torquethresholdConfig" [markers]="torquemarkers" [size]="250" [margin]="30" [thick]="10">
+        </ngx-gauge>
+      </div>
+    </div>
+
+    <div class="input-value">
+      <!-- <h1>
+    Welcome to {{ title }}!
+  </h1> -->
+      <div class="gauge-container">
+        <ngx-gauge class="guage" [type]="toolWeargaugeType" [value]="toolWeargaugeValue" [label]="toolWeargaugeLabel"
+          [append]="toolWeargaugeAppendText" [min]="toolWeargaugeMinValue" [max]="toolWeargaugeMaxValue"
+          [thresholds]="toolWearthresholdConfig" [markers]="toolWearmarkers" [size]="250" [margin]="30" [thick]="10">
+        </ngx-gauge>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- <div class="result-overall-container"> -->
+  <div class="result-container">
+    <h3 class="prediction-title">Prediction</h3>
+    <div *ngIf="failure_type!='No Failure'" class="failure-info">
+      <div class="alert-tilte">Alert <i class="fa-light fa-sensor-triangle-exclamation"></i></div>
+      <div class="result-info"><span style="font-weight: bold;">{{failure_type}}</span> occured on {{reading_date}} at
+        {{reading_time}}</div>
+      <div class="result-info">Priority Level:<span style="font-weight: bold;">{{priority}}</span></div>
+      <div class="result-info">Schedule Maintenance within <span
+          style="font-weight: bold;">{{days_for_maintenance}}</span> </div>
+    </div>
+
+    <div class="no-failure-info" *ngIf="failure_type==='No Failure'">
+      <div>Regular maintenance should be performed <span style="font-weight: bold;">every 3 month</span>
+      </div>
+    </div>
+  </div>
+
+  
+
+</div>
+
+<div class="failure-table">
+  <div class="title-close-container">
+   
+    <h3 class="prediction-title">Failure History</h3>
+    <fa-icon (click)="failureTableClose()" [icon]="xmarkIcon" style="font-size: 25px;"></fa-icon>
+
+  </div>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Air Temp</th>
+        <th>Process Temp</th>
+        <th>Rotational Speed</th>
+        <th>Torque</th>
+        <th>Tool Wear</th>
+        <th>Failure Type</th>
+        <th>Priority</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Maintenance Due Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let failure of latestFiveFailure">
+        <td>{{failure["air_temperature"]}}</td>
+        <td>{{failure["process_temperature"]}}</td>
+        <td>{{failure["rotational_speed"]}}</td>
+        <td>{{failure["torque"]}}</td>
+        <td>{{failure["tool_wear"]}}</td>
+        <td>{{ failure["failure_type"] }}</td>
+        <td>{{ failure["priority"] }}</td>
+        <td>{{ failure["reading_date"] }}</td>
+        <td>{{ failure["reading_time"] }}</td>
+        <td>{{ failure["days_for_maintenance"] }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
+<!-- <h3 class="title">Machine Sensor Monitoring</h3>
 
 <div class="reading-values">
   <div class="input-value">
@@ -47,9 +184,7 @@
   </div>
 
   <div class="input-value">
-    <!-- <h1>
-    Welcome to {{ title }}!
-  </h1> -->
+  
     <div class="gauge-container">
       <ngx-gauge class="guage" [type]="processTempgaugeType" [value]="processTempgaugeValue"
         [label]="processTempgaugeLabel" [append]="processTempgaugeAppendText" [min]="processTempgaugeMinValue"
@@ -60,9 +195,6 @@
   </div>
 
   <div class="input-value">
-    <!-- <h1>
-    Welcome to {{ title }}!
-  </h1> -->
     <div class="guage-container">
       <ngx-gauge class="guage" [type]="rotationalSpeedgaugeType" [value]="rotationalSpeedgaugeValue"
         [label]="rotationalSpeedgaugeLabel" [append]="rotationalSpeedgaugeAppendText"
@@ -74,9 +206,7 @@
   </div>
 
   <div class="input-value">
-    <!-- <h1>
-    Welcome to {{ title }}!
-  </h1> -->
+  
     <div class="gauge-container">
       <ngx-gauge class="guage" [type]="torquegaugeType" [value]="torquegaugeValue" [label]="torquegaugeLabel"
         [append]="torquegaugeAppendText" [min]="torquegaugeMinValue" [max]="torquegaugeMaxValue"
@@ -86,9 +216,7 @@
   </div>
 
   <div class="input-value">
-    <!-- <h1>
-    Welcome to {{ title }}!
-  </h1> -->
+  
     <div class="gauge-container">
       <ngx-gauge class="guage" [type]="toolWeargaugeType" [value]="toolWeargaugeValue" [label]="toolWeargaugeLabel"
         [append]="toolWeargaugeAppendText" [min]="toolWeargaugeMinValue" [max]="toolWeargaugeMaxValue"
@@ -99,7 +227,7 @@
 </div>
 
 
-<div class="result-overall-container">
+
   <div class="result-container">
     <h3 class="prediction-title">Prediction</h3>
     <div *ngIf="failure_type!='No Failure'" class="failure-info">
@@ -115,10 +243,12 @@
       <div>Regular maintenance should be performed on <span style="font-weight: bold;">{{days_for_maintenance}}</span>
       </div>
     </div>
-  </div>
+  </div> -->
 
 
-  <div class="failure-table">
+
+<!-- 
+<div class="failure-table">
     <h3 class="prediction-title">Failure History</h3>
     <table>
       <thead>
@@ -140,8 +270,8 @@
         </tr>
       </tbody>
     </table>
-  </div>
-</div>
+  </div> -->
+<!-- </div> -->
 
 
 

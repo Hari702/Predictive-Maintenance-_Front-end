@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, inject ,NgZone,Renderer2,ElementRef, AfterViewInit} from '@angular/core';
+import { Component, OnInit, inject ,NgZone,Renderer2,ElementRef, AfterViewInit, viewChild, ViewChild} from '@angular/core';
 import { SocketService } from '../socket.service';
 import { Socket } from 'ngx-socket-io';
 import { CsvDataService } from '../csv-data.service';
 import { NgxGaugeType } from 'ngx-gauge/gauge/gauge';
+import { faXmark,faCircleExclamation} from '@fortawesome/free-solid-svg-icons';
 
 interface PredictionResponse {
   priority: string;
@@ -24,10 +25,14 @@ export class PredictionResultComponent implements AfterViewInit {
   days_for_maintenance: number = 0
   reading_time:any
   reading_date:any
-  // predictions: any[] = [];
   predictions: PredictionResponse[] = [];
+  xmarkIcon=faXmark;
+  circleImportantIcon=faCircleExclamation
+
   // constructor(private socketService: SocketService) {}
-  constructor(private csvDataService: CsvDataService,private http: HttpClient, private zone: NgZone,private el: ElementRef, private renderer: Renderer2) {  }
+  constructor(private csvDataService: CsvDataService,private http: HttpClient, private zone: NgZone,private el: ElementRef, private renderer: Renderer2) { 
+   
+   }
   
   response: any
   latestFiveFailure:any[]=[]
@@ -180,6 +185,11 @@ export class PredictionResultComponent implements AfterViewInit {
         // console.log(this.response);
         
         const failureEntry = {
+          air_temperature:parseInt(this.response["Air temperature"]),
+          process_temperature:parseInt(this.response["Process temperature"]),
+          rotational_speed:parseInt(this.response["Rotational speed"]),
+          torque:parseInt(this.response["Torque"]),
+          tool_wear:parseInt(this.response["Tool wear"]),
           failure_type: this.response["failure_type"],
           priority: this.response["priority"],
           reading_date: this.response["DateTime"],
@@ -198,7 +208,7 @@ export class PredictionResultComponent implements AfterViewInit {
             this.latestFiveFailure.unshift(failureEntry)
         }
 
-        if (this.latestFiveFailure.length > 5) {
+        if (this.latestFiveFailure.length > 10) {
           this.latestFiveFailure.pop();
         }
 
@@ -249,6 +259,29 @@ export class PredictionResultComponent implements AfterViewInit {
       }
 
     })
+  }
+
+  overallContainer:any
+  failureTable:any
+
+  blurFunction(){
+      this.overallContainer=document.getElementById("prediction-overall-container-id")
+      this.overallContainer.classList.toggle('active')
+      this.failureTable=this.el.nativeElement.querySelector(".failure-table")
+      this.failureTable.style.visibility="visible"
+      this.failureTable.style.opacity=1
+      // this.failureTable.style.background="white"
+      console.log(this.failureTable)    
+    // this.overallContainer=this.el.nativeElement.getElementById("prediction-overall-container-id")
+    // console.log(this.overallContainer)
+  }
+
+  failureTableClose(){
+    this.overallContainer=document.getElementById("prediction-overall-container-id")
+    this.overallContainer.classList.toggle('active')
+    this.failureTable=this.el.nativeElement.querySelector(".failure-table")
+    this.failureTable.style.visibility="hidden"
+    this.failureTable.style.opacity=0
   }
 
   

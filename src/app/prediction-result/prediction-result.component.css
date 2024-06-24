@@ -1,8 +1,39 @@
+.prediction-overall-container{
+    position: relative;
+}
+
+.failure-history-btn{
+    /* border: none; */
+    /* background-color:white; */
+    background-color: hsl(360,99%,31%);
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
 .title{
     text-align: center; 
-    margin-top:30px;
+    /* margin-top:30px; */
     /* font-style: italic; */
     color:hsl(360,99%,31%);
+}
+
+.title-failure-history-container{
+    display: flex;
+    justify-content:space-between;
+    margin-top: 30px;
+    margin-left: 45px;
+    margin-right: 50px;
+    align-items: center;
+}
+
+.active{
+    filter: blur(8px);  
+    pointer-events: none; 
+    user-select: none;
 }
 
 
@@ -89,9 +120,22 @@
 
 
 .failure-table{
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    right: 10%;
+    visibility:hidden;
+    opacity: 0;
+    background-color: whitesmoke;
+    border-radius: 5px;
+}
+
+
+
+/* .failure-table{
     width: 600px;
     margin-top: 50px;
-}
+} */
 
 table {
     width: 100%;
@@ -101,6 +145,7 @@ table {
   th, td {
     border: 1px solid #ddd;
     padding: 8px;
+    text-align: center;
   }
   
   th {
@@ -110,3 +155,13 @@ table {
   tr:nth-child(odd) {
     background-color: hsl(15,80%,96%);
   }
+
+
+.title-close-container{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 20px;
+    
+}
