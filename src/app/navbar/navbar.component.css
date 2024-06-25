@@ -4,7 +4,11 @@
     padding: 20px;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
     /* margin-top: 10px; */
-    background-color: hsl(357,56%,45%);
+    /* background-color: hsl(231,54%,40%); */
+    background-color: hsl(228,58%,40%);
+    /* background-color: hsl(211,100%,50%); */
+    /* background-color:hsl(200,100%,36%); */
+    /* background-color: hsl(233,80%,31%); */
     color: white;
 }
 

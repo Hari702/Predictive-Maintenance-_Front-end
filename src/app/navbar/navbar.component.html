@@ -5,11 +5,11 @@
         <!-- <a routerLink="Home">Home</a>
         <a *ngIf="display" routerLink="Prediction">Prediction</a> -->
 
-        <a routerLink="Home" [class.selected]="selectedLink === 'Home'" (click)="handleClick('Home')">Home</a>
+        
         <a  routerLink="Config" [class.selected]="selectedLink === 'Config'"
             (click)="handleClick('Config')">Configuration</a>
-
         <a routerLink="PredictionResult" [class.selected]="selectedLink === 'PredictionResult'" (click)="handleClick('PredictionResult')">Prediction</a>
+        <a routerLink="Home" [class.selected]="selectedLink === 'Home'" (click)="handleClick('Home')">Home</a>
 
 
     </div>
