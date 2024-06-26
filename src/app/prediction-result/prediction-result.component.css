@@ -1,10 +1,22 @@
+.overall-prediction-container{
+   /* background-color: #E3E3E3; */
+   background-color: rgba(255, 255, 255, 0.90);
+   margin-top: 0;
+}
+
+
 .sensor-filter-container{
-    margin-top: 30px;
+    /* margin-top: 30px; */
+    padding-top: 30px;
     margin-left: 50px;
     margin-right: 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+select{
+    /* background-color: #E3E3E3; */
 }
 
 .filter-container{
@@ -47,7 +59,7 @@ select:focus{
 .input-value{
     width: 250px;
     /* background-color: hsl(15,80%,96%); */
-    border: 3px solid hsl(224, 10%, 79%);
+    border: 1px solid hsl(224, 10%, 79%);
     display: flex;
     border-radius: 5px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -105,6 +117,7 @@ select:focus{
     padding: 20px;
     border-radius: 5px;
     border: 1px solid hsl(224, 10%, 79%);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .report-info-1{
@@ -161,25 +174,28 @@ select:focus{
     align-items: center;
     justify-self: center;
 }
-.failure-info{
+/* .failure-info{
     background-color: hsl(360,99%,31%);
     color: white;
     padding: 20px;
     border-radius: 10px;
     
-}
+} */
 .alert-tilte{
     text-align: center;
+    display: flex;
+    align-items: center;
 }
-.no-failure-info{
+/* .no-failure-info{
     background-color: hsl(120,100%,27%);
     padding: 20px;
     color: white;
     border-radius: 10px;
-}
+} */
 .result-info{
     /* margin-bottom: 10px; */
     margin-top: 10px;
+    align-self: self-start;
 }
 
 .report-info1{
@@ -240,6 +256,52 @@ table {
     /* background-color: hsl(200,100%,36%); */
   }
 
+  .greensign{
+    background: url('../../assets/images/green\ sign.png') 50% / contain no-repeat;
+    width: 30px;
+    height: 25px;
+}
+
+
+.no-failure-info{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-family: 'Poppins';
+    font-size: 15px;
+    background-color: hsl(0, 0%, 100%);
+    padding: 20px;
+    color: rgb(0, 0, 0);
+    border-radius: 10px;
+    box-shadow: 0px 0px 14px 0px rgba(154, 241, 179, 0.515);
+}
+
+
+.failure-info{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Poppins';
+    font-size: 15px;
+    background-color: hsl(0, 0%, 100%);
+    padding: 20px;
+    color: rgb(0, 0, 0);
+    border-radius: 10px;
+    box-shadow: 0px 0px 8px 0px rgb(215, 60, 65);
+    animation: breathing 3s infinite;
+    
+}
+
+
+.redsign1{
+    justify-content: flex-start;
+    background: url('../../assets/images/red\ sign.png') 50% / contain no-repeat;
+    width: 30px;
+    height: 25px;
+    margin-right: 2px;
+}
 
 
 

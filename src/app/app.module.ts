@@ -14,7 +14,8 @@ import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { NgxGaugeModule } from 'ngx-gauge';
 import { ConfigurationComponent } from './configuration/configuration.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 // Define route
@@ -44,10 +45,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     HttpClientModule,
     FormsModule,
     NgxGaugeModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatSnackBarModule
     // SocketIoModule.forRoot(config)
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

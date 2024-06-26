@@ -1,15 +1,17 @@
 <div class="navbar">
-    <div class="navbar-title">Predictive Maintenance</div>
+    <!-- <div class="navbar-title">Predictive Maintenance</div> -->
+    <img src="https://imagetolink.com/ib/v4XHO1t3ze.png" alt="TASNEE Logo" class="logo">
     <div class="navbar-menu">
 
         <!-- <a routerLink="Home">Home</a>
         <a *ngIf="display" routerLink="Prediction">Prediction</a> -->
 
-        
-        <a  routerLink="Config" [class.selected]="selectedLink === 'Config'"
+
+        <a routerLink="Config" [class.selected]="selectedLink === 'Config'"
             (click)="handleClick('Config')">Configuration</a>
-        <a routerLink="PredictionResult" [class.selected]="selectedLink === 'PredictionResult'" (click)="handleClick('PredictionResult')">Prediction</a>
-        <a routerLink="Home" [class.selected]="selectedLink === 'Home'" (click)="handleClick('Home')">Home</a>
+        <a routerLink="PredictionResult" [class.selected]="selectedLink === 'PredictionResult'"
+            (click)="handleClick('PredictionResult')">Prediction</a>
+        <a routerLink="Home" [class.selected]="selectedLink === 'Home'" (click)="handleClick('Home')">Help</a>
 
 
     </div>

@@ -1,7 +1,8 @@
 .navbar{
     display: flex;
     justify-content: space-between;
-    padding: 20px;
+    align-items: center;
+    padding: 15px;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
     /* margin-top: 10px; */
     /* background-color: hsl(231,54%,40%); */
@@ -38,4 +39,10 @@
     /* color: rgb(167, 51, 51); */
     color: white;
     text-decoration: underline;
+  }
+
+  .logo {
+    /* margin-left: 18px; */
+    width: 150px;
+    /* height: 52px; */
   }

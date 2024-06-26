@@ -5,6 +5,8 @@ import { Socket } from 'ngx-socket-io';
 import { CsvDataService } from '../csv-data.service';
 import { NgxGaugeType } from 'ngx-gauge/gauge/gauge';
 import { faXmark,faCircleExclamation} from '@fortawesome/free-solid-svg-icons';
+import emailjs,  {EmailJSResponseStatus } from 'emailjs-com';
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 
 interface PredictionResponse {
   priority: string;
@@ -22,7 +24,8 @@ export class PredictionResultComponent implements AfterViewInit {
   // http: HttpClient = inject(HttpClient)
   priority: any
   failure_type: any
-  days_for_maintenance: number = 0
+  // days_for_maintenance: number = 0
+  days_for_maintenance:any
   reading_time:any
   reading_date:any
   predictions: PredictionResponse[] = [];
@@ -30,7 +33,7 @@ export class PredictionResultComponent implements AfterViewInit {
   circleImportantIcon=faCircleExclamation
 
   // constructor(private socketService: SocketService) {}
-  constructor(private csvDataService: CsvDataService,private http: HttpClient, private zone: NgZone,private el: ElementRef, private renderer: Renderer2) { 
+  constructor(private csvDataService: CsvDataService,private http: HttpClient, private zone: NgZone,private el: ElementRef, private renderer: Renderer2,private snackBar: MatSnackBar) { 
    
    }
   
@@ -182,7 +185,7 @@ export class PredictionResultComponent implements AfterViewInit {
       this.zone.run(() => {
         // console.log(event)
         this.response = JSON.parse(event.data);
-        // console.log(this.response);
+        console.log(this.response);
         
         const failureEntry = {
           air_temperature:parseInt(this.response["Air temperature"]),
@@ -234,6 +237,10 @@ export class PredictionResultComponent implements AfterViewInit {
           this.toolWeargaugeValue=parseInt(this.response["Tool wear"])
         }
 
+        if(this.failure_type!=="No Failure")
+
+        this.sendFailureEmail(this.failure_type,this.priority,this.reading_date,this.reading_time,this.days_for_maintenance)
+
 
 
       });
@@ -282,6 +289,49 @@ export class PredictionResultComponent implements AfterViewInit {
     this.failureTable=this.el.nativeElement.querySelector(".failure-table")
     this.failureTable.style.visibility="hidden"
     this.failureTable.style.opacity=0
+  }
+
+  // sendFailureEmail(index: number, date: string, timestamp: string, cameraNumber: number, cameraName: string, factoryNumber: number, newImage: string, modelImage: string)
+
+
+  sendFailureEmail(failure_type:string,priority:string,date:string,time:string,maintenance_date:string) {
+    let subject = '';
+    let body = '';
+ 
+    // if (index === 0 || index === 3) {
+    //   subject = 'Fire is detected';
+    //   body = `There is a confirmed Fire detected in Camera Number: ${cameraNumber}, Factory Number: ${factoryNumber} on ${date} at ${timestamp}, Please take immediate actions`;
+    //   this.snackBar.open('Email sent to the Supervisor - Fire emergency', 'Close', { duration: 7000  });
+    // } else if (index === 6 || index === 7) {
+    //   subject = 'No helmet is detected';
+    //   body = `Please ensure all personnel are wearing helmets . Incident detected in Camera Number: ${cameraNumber}, Factory Number: ${factoryNumber} on ${date} at ${timestamp}`;
+    //   this.snackBar.open('Email sent to the Supervisor - Please ensure all personnel are wearing helmets.', 'Close', { duration: 7000});
+    // }
+
+    if(failure_type!=="No Failure"){
+      console.log("failure")
+      // subject=failure_type +"Occurs"
+      subject=`FAILURE ALERT`
+      body=`We would like to inform you of a maintenance issue that requires your attention: ${failure_type} with a priority of ${priority} was reported on ${date} at ${time} and is scheduled for maintenance on ${maintenance_date}.`
+      console.log(body)
+      // this.snackBar.open(`Email sent to the Supervisor -${failure_type} `,'Close',{duration:7000,verticalPosition:'top',horizontalPosition:'center'});
+    }
+
+      
+ 
+    const emailParams = {
+      to_name: `Ali`,
+      from_name: 'Maintenance Team',
+      subject: subject,
+      message: body,
+    };
+ 
+    // emailjs.send('service_owhkjrp', 'template_jwy1y6q', emailParams, '9p3rVZISgBlykKMab')
+    //   .then((response: EmailJSResponseStatus) => {
+    //     console.log('Email successfully sent!', response.status, response.text);
+    //   }, (error) => {
+    //     console.error('Failed to send email. Error:', error);
+    //   });
   }
 
   
